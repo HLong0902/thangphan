@@ -56,19 +56,19 @@ public class FileUploadController {
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
-    @Permission
-    @PostMapping("/")
-    public String handleFileUpload(@RequestParam("file") MultipartFile[] file,
-                                   RedirectAttributes redirectAttributes,
-                                   HttpServletRequest request) {
-        for (int i = 0; i < file.length; i++) {
-            storageService.store(file[i]);
-        }
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.length + " file!");
-
-        return "redirect:/upload";
-    }
+//    @Permission
+//    @PostMapping("/")
+//    public String handleFileUpload(@RequestParam("file") MultipartFile[] file,
+//                                   RedirectAttributes redirectAttributes,
+//                                   HttpServletRequest request) {
+//        for (int i = 0; i < file.length; i++) {
+//            storageService.store(file[i]);
+//        }
+//        redirectAttributes.addFlashAttribute("message",
+//                "You successfully uploaded " + file.length + " file!");
+//
+//        return "redirect:/upload";
+//    }
 
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {

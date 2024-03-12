@@ -25,10 +25,10 @@ public class LoginController {
     @Autowired
     private StorageService storageService;
 
-    @RequestMapping(value = {"/", "/login"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 
@@ -39,7 +39,8 @@ public class LoginController {
                               HttpServletRequest request) {
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
+        modelAndView.addObject("data", "");
+        modelAndView.setViewName("admin/index");
         return modelAndView;
     }
 
