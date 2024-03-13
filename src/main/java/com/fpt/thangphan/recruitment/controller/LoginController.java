@@ -1,38 +1,21 @@
-package com.fpt.thangphan.recruitment.Controller;
+package com.fpt.thangphan.recruitment.controller;
 
 
-import com.fpt.thangphan.recruitment.configuration.Permission;
-import com.fpt.thangphan.recruitment.sevice.UploadTextService;
-import com.fpt.thangphan.recruitment.storage.StorageService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
-
 
 @Controller
 public class LoginController {
-    @Autowired
-    private Map<String, String> loginData;
-
-
-    @Autowired
-    private UploadTextService uploadTextService;
-
-    @Autowired
-    private StorageService storageService;
-
-    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/login", "/error"}, method = RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @Permission
     @PostMapping("/login")
     public ModelAndView login(@RequestParam(value = "password", required = false) String pass,
                               @RequestParam(value = "username", required = false) String username,
@@ -46,10 +29,7 @@ public class LoginController {
 
     @GetMapping(value = {"/logout", "/log-out"})
     public ModelAndView logout(HttpServletRequest request) {
-
-        loginData.remove(request.getRemoteAddr());
-
-        ModelAndView modelAndView = new ModelAndView();
+                ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
         return modelAndView;
     }
@@ -85,7 +65,6 @@ public class LoginController {
 //        return modelAndView;
 //    }
 
-    @Permission
     @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
     public ModelAndView home(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
